@@ -1,0 +1,132 @@
+// Contains SLiM scripts for overdominance simulations
+// @author: ozgur taskent
+// @e-mail: ozgur.taskent86 [at] gmail.com
+
+initialize() {
+    // Simulate 50 kb segment
+    defineConstant("L", 50000);
+    defineConstant("Ne", 10000);
+
+    // Output directory
+    defineConstant(
+        "OUTDIR" // Update with actual path
+    );
+
+    // Mutation and recombination rates
+    initializeMutationRate(1e-8);
+    initializeRecombinationRate(1e-8);
+
+    // Neutral mutations
+    initializeMutationType("m1", 0.5, "f", 0.0);
+
+    // Overdominant selected mutation:
+    // for 2*Ne*s=1000: h = 20, s = 0.0025, h*s = 0.05 
+    // for 2*Ne*s=500: h = 20, s = 0.00125, h*s = 0.025 
+    // for 2*Ne*s=200; h = 20 and s = 0.0005, hs = 0.01 
+    // for 2*Ne*s=100: h = 20 and s = 0.00025, hs = 0.005
+    // for 2*Ne*s=50: h = 20 and s = 0.000125, hs = 0.0025 
+    // for 2*Ne*s=10; h = 20 and s = 0.000025, hs = 0.0005
+    // for 2*Ne*s=5: h = 20 and s = 0.0000125, hs = 0.00025
+    // for 2*Ne*s=2: h = 20 and s = 0.000005, hs = 0.0001    
+    // 2*Ne*s=1000: h = 20, s = 0.0025, h*s = 0.05
+    initializeMutationType("m2", 20, "f", 0.0025);
+    m2.convertToSubstitution = F;
+
+    // Genomic element
+    initializeGenomicElementType("g1", m1, 1.0);
+    initializeGenomicElement(g1, 0, L - 1);
+}
+
+
+1 early() {
+    // Simulation ID based on seed
+    defineConstant("simID", getSeed());
+
+    // Temporary burn-in file and frequency output file
+    defineConstant("TMPFILE", "/tmp/slim_" + simID + ".txt");
+    defineConstant("FREQFILE", OUTDIR + "/freq_file.txt");
+
+    // Add population: Ne = 10,000 diploids
+    sim.addSubpop("p1", Ne);
+}
+
+
+100000 late() {
+    // Save burn-in state before introducing selected mutation
+    sim.outputFull(TMPFILE);
+
+    // Introduce selected mutation into one genome at the center
+    target = sample(p1.genomes, 1);
+    target.addNewDrawnMutation(m2, asInteger(L / 2));
+}
+
+
+100000:140480 late() {
+    tick = community.tick;
+
+    // Count copies of selected mutation
+    total_mut_count = sum(p1.individuals.countOfMutationsOfType(m2));
+
+    // Calculate selected allele frequency
+    freq = total_mut_count / (2 * Ne);
+
+    // Save frequency trajectory
+    writeFile(FREQFILE, paste(tick, freq), append = T);
+
+    // If selected mutation is lost, restart from saved burn-in state
+    if (total_mut_count == 0) {
+        print(simID + ": LOST-RESTARTING from generation 100000.");
+
+        // Delete frequency trajectory from failed run
+        deleteFile(FREQFILE);
+
+        // Reload burn-in state
+        sim.readFromPopulationFile(TMPFILE);
+
+        // Change seed before reintroducing mutation
+        setSeed(getSeed() + 1);
+
+        // Reintroduce selected mutation
+        target = sample(p1.genomes, 1);
+        target.addNewDrawnMutation(m2, asInteger(L / 2));
+    }
+
+    // If selected mutation is fixed, restart from saved burn-in state
+    if (total_mut_count == 2 * Ne) {
+        print(simID + ": FIXED-RESTARTING from generation 100000.");
+
+        // Delete frequency trajectory from failed run
+        deleteFile(FREQFILE);
+
+        // Reload burn-in state
+        sim.readFromPopulationFile(TMPFILE);
+
+        // Change seed before reintroducing mutation
+        setSeed(getSeed() + 1);
+
+        // Reintroduce selected mutation
+        target = sample(p1.genomes, 1);
+        target.addNewDrawnMutation(m2, asInteger(L / 2));
+    }
+
+    // Sampling only between generations 140000 and 140480
+    // Sampling every 40 generations = every 1000 years assuming 25 years/generation
+    if (tick >= 140000 & tick <= 140480 & ((tick - 140000) % 40 == 0)) {
+        label = (tick - 140000) * 25;
+
+        p1.outputMSSample(
+            200,
+            replace = F,
+            filePath = OUTDIR + "/p_" + label + ".ms"
+        );
+    }
+}
+
+
+140481 early() {
+    // Remove temporary burn-in file
+    deleteFile(TMPFILE);
+
+    // End simulation
+    sim.simulationFinished();
+}
