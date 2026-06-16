@@ -11,7 +11,7 @@ Calculate summary statistics from one ms-format SLiM output file.
 Contains required modules to process simulations
 
 Usage:
-    python estimate_summary_plus_freq_stats_het_adv_subsNOTkept.py \
+    python calculate_summary_statistics.py \
         <INPUT_FILE> <SELECTION_MODE> <SELECTION_STRENGTH> <RUN> <SAMPLING_TIME> <OUTPUT_FILE>
 """
 
