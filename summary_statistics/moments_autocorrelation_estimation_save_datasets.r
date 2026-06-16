@@ -23,11 +23,13 @@ library(e1071)
 #       <moments_bal_sel_output> \
 #       <moments_over_vs_neutral_output> \
 #       <autocorr_bal_sel_output> \
-#       <autocorr_over_vs_neutral_output>
+#       <autocorr_over_vs_neutral_output> \
+#       <moments_autocorr_bal_sel_output> \
+#       <moments_autocorr_over_vs_neutral_output>
 
 args <- commandArgs(trailingOnly = TRUE)
 
-if (length(args) != 7) {
+if (length(args) != 9) {
   stop(
     "Usage: Rscript calculate_moments_autocorrelation.R ",
     "<input_summary_statistics_file> ",
@@ -36,7 +38,9 @@ if (length(args) != 7) {
     "<moments_bal_sel_output> ",
     "<moments_over_vs_neutral_output> ",
     "<autocorr_bal_sel_output> ",
-    "<autocorr_over_vs_neutral_output>"
+    "<autocorr_over_vs_neutral_output>",
+    "<moments_autocorr_bal_sel_output> ",
+    "<moments_autocorr_over_vs_neutral_output>"
   )
 }
 
@@ -50,6 +54,9 @@ moments_over_vs_neutral_output <- args[5]
 
 autocorr_bal_sel_output <- args[6]
 autocorr_over_vs_neutral_output <- args[7]
+
+moments_autocorr_bal_sel_output <- args[8]
+moments_autocorr_over_vs_neutral_output <- args[9]
 
 
 ############################################################
@@ -293,7 +300,23 @@ df_autocorr_summary_stats_overVSneutral <- df_autocorr_summary_stats %>%
 
 
 ############################################################
-## 7. Save output files
+## 7. Merge moments and autocorrelation  statistics 
+############################################################
+df_moments_autocorr_summary_stats <- inner_join(
+  df_moments_summary_stats,
+  df_autocorr_summary_stats,
+  by = c("Selection_mode", "Selection_strength", "Run")
+)
+
+df_moments_autocorr_summary_stats_bal_sel <- df_moments_autocorr_summary_stats %>%
+  filter(Selection_mode %in% c("Overdominance", "NFDS"))
+
+df_moments_autocorr_summary_stats_overVSneutral <- df_moments_autocorr_summary_stats %>%
+  filter(Selection_mode %in% c("Overdominance", "Neutral"))
+
+
+############################################################
+## 8. Save output files
 ############################################################
 
 write.table(
@@ -344,6 +367,24 @@ write.table(
 write.table(
   df_autocorr_summary_stats_overVSneutral,
   autocorr_over_vs_neutral_output,
+  sep = "\t",
+  col.names = TRUE,
+  quote = FALSE,
+  row.names = FALSE
+)
+
+write.table(
+  df_moments_autocorr_summary_stats_bal_sel,
+  moments_autocorr_bal_sel_output,
+  sep = "\t",
+  col.names = TRUE,
+  quote = FALSE,
+  row.names = FALSE
+)
+
+write.table(
+  df_moments_autocorr_summary_stats_overVSneutral,
+  moments_autocorr_over_vs_neutral_output,
   sep = "\t",
   col.names = TRUE,
   quote = FALSE,
