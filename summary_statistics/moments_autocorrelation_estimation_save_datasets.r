@@ -226,7 +226,7 @@ df_moments_summary_stats <- df_summary_stats %>%
         skewness = ~ skewness(.x, na.rm = TRUE),
         kurtosis = ~ kurtosis(.x, na.rm = TRUE)
       ),
-      .names = "{.fn}_{.col}"
+      .names = "{.col}_{.fn}"
     ),
     .groups = "drop"
   )
