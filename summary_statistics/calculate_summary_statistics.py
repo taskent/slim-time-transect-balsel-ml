@@ -231,7 +231,6 @@ def sum_stats(croms, pos, nchroms, selection_mode, selection_strength, run, samp
         - Trimmed_Mean_Frequency: mean of SNP frequencies with 0.1 < f < 0.9
         - Fraction_Intermediate_Frequency: fraction of SNPs with 0.3 < f < 0.7
 
-    Target mutation frequency is intentionally not estimated here.
     """
 
     # -----------------------------
@@ -328,7 +327,7 @@ def sum_stats(croms, pos, nchroms, selection_mode, selection_strength, run, samp
     max_mean_pwise_dis = np.max(mpd)
 
     # -----------------------------
-    # Frequency-distribution distance
+    # Balancing Selection Statistic
     # -----------------------------
     # NCD: distance of non-fixed SNP frequencies from target frequency 0.5.
     tf = 0.5
