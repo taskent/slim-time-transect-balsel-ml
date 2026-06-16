@@ -141,7 +141,7 @@ Arguments:
 | ------------------ | ------------------------------------------ |
 | input_ms_file      | ms-format SLiM output file                 |
 | selection_mode     | Overdominance, NFDS or Neutral             |
-| selection_strength | Selection-strength category (e.g. 2Nes500) |
+| selection_strength | Selection-strength category (e.g. 2Nes=500)|
 | run_id             | Simulation replicate identifier            |
 | sampling_time      | Sampling time relative to the present      |
 | output_file        | output file including summary statistics   |
@@ -157,7 +157,7 @@ Statistics include:
 ### Heterozygosity statistics
 
 * Observed heterozygosity (mean, median, maximum)
-* Observed/expected heterozygosity ratio (mean, median, maximum)
+* Observed/expected heterozygosity (mean, median, maximum)
 
 ### Linkage disequilibrium
 
