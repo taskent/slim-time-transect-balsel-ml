@@ -200,7 +200,7 @@ Statistics include:
 
 ## Balancing Selection Scan Statistics
 
-Beta1 and B0_MAF are not estimated by `calculate_summary_statistics.py`.
+β<sup>(1)</sup> and B<sub>0,MAF</sub> are not estimated by `calculate_summary_statistics.py`.
 
 Instead, they are estimated using a separate pipeline consisting of:
 
@@ -209,6 +209,49 @@ b0maf_beta1_pipeline.sh
 convert_ms2vcf.py
 create_folded_sfs_from_concatenated_neutal_allele_counts.py
 ```
+
+### b0maf_beta1_pipeline.sh
+
+Pipeline for estimating:
+
+* B<sub>0,MAF</sub> (BalLeRMix+)
+* β<sup>(1)</sup> (BetaScan)
+
+Pipeline steps:
+
+1. Convert ms output to VCF (with convert_ms2vcf.py)
+2. Generate BalLeRMix+ input
+3. Construct folded neutral SFS (with create_folded_sfs_from_concatenated_neutal_allele_counts.py)
+4. Run BalLeRMix+
+5. Prepare BetaScan input
+6. Run BetaScan
+
+#### Usage
+
+```bash
+bash b0maf_beta1_pipeline.sh \
+    <input_ms_file> \
+    <output_prefix> \
+    <window_size> \
+    <neutral_sfs_file>
+```
+
+Arguments:
+
+| Argument         | Description                           |
+| ---------------- | ------------------------------------- |
+| input_ms_file    | ms-format simulation file             |
+| output_prefix    | Prefix for all output files           |
+| window_size      | Window size around target site        |
+| neutral_sfs_file | Folded neutral SFS used by BalLeRMix+ |
+
+Required external software:
+
+* BalLeRMix+
+* BetaScan
+* Python 3
+
+---
 
 ### convert_ms2vcf.py
 
@@ -251,49 +294,6 @@ Arguments:
 | ----------- | ----------------------------------------------------------------------------------------------- |
 | input_file  | Concatenated neutral allele-count file (concatenated output files of parse_ballermix_input.py)  |
 | output_file | Folded SFS file                                                                                 |
-
----
-
-### b0maf_beta1_pipeline.sh
-
-Pipeline for estimating:
-
-* B0_MAF (BalLeRMix+)
-* Beta1 (BetaScan)
-
-Pipeline steps:
-
-1. Convert ms output to VCF
-2. Generate BalLeRMix+ input
-3. Construct folded neutral SFS
-4. Run BalLeRMix+
-5. Prepare BetaScan input
-6. Run BetaScan
-
-#### Usage
-
-```bash
-bash b0maf_beta1_pipeline.sh \
-    <input_ms_file> \
-    <output_prefix> \
-    <window_size> \
-    <neutral_sfs_file>
-```
-
-Arguments:
-
-| Argument         | Description                           |
-| ---------------- | ------------------------------------- |
-| input_ms_file    | ms-format simulation file             |
-| output_prefix    | Prefix for all output files           |
-| window_size      | Window size around target site        |
-| neutral_sfs_file | Folded neutral SFS used by BalLeRMix+ |
-
-Required external software:
-
-* BalLeRMix+
-* BetaScan
-* Python 3
 
 ---
 
