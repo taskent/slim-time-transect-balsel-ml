@@ -180,10 +180,15 @@ awk '{if($3 >= 3) {print $1"\t"$3"\t"$4}}' \
 #
 #   -w:
 #       window size
+#
+#   -fold:
+#        use folded frequency spectrum
+
 python3 BetaScan.py \
     -i "$BETASCAN_INPUT" \
     -m "$BETASCAN_M" \
     -w "$WINDOW" \
+    -fold \
     -o "$BETA1_OUT"
 
 
