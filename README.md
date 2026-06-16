@@ -249,7 +249,7 @@ Arguments:
 
 | Argument    | Description                                                                                     |
 | ----------- | ----------------------------------------------------------------------------------------------- |
-| input_file  | Concatenated neutral allele-count file (concatenated output files of parse_ballermix_input.py ) |
+| input_file  | Concatenated neutral allele-count file (concatenated output files of parse_ballermix_input.py)  |
 | output_file | Folded SFS file                                                                                 |
 
 ---
