@@ -18,7 +18,7 @@ This analysis evaluates whether balancing selection can be reliably detected fro
 
 This analysis evaluates whether different balancing-selection mechanisms generate distinguishable temporal genetic signatures.
 
-For both classification tasks, machine-learning models were trained using summary statistics derived from SLiM simulations and compared across four feature sets:
+For both classification tasks, machine-learning models were trained using 37 population genetic summary statistics derived from SLiM simulations and compared across four feature sets:
 
 * Present-day summary statistics only
 * Temporal moments
