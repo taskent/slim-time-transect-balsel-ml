@@ -230,7 +230,6 @@ def sum_stats(croms, pos, nchroms, selection_mode, selection_strength, run, samp
         - Median_Frequency
         - Trimmed_Mean_Frequency: mean of SNP frequencies with 0.1 < f < 0.9
         - Fraction_Intermediate_Frequency: fraction of SNPs with 0.3 < f < 0.7
-
     """
 
     # -----------------------------
