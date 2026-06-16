@@ -247,10 +247,10 @@ python3 create_folded_sfs_from_concatenated_neutal_allele_counts.py \
 
 Arguments:
 
-| Argument    | Description                            |
-| ----------- | -------------------------------------- |
-| input_file  | Concatenated neutral allele-count file |
-| output_file | Folded SFS file                        |
+| Argument    | Description                                                                                     |
+| ----------- | ----------------------------------------------------------------------------------------------- |
+| input_file  | Concatenated neutral allele-count file (concatenated output files of parse_ballermix_input.py ) |
+| output_file | Folded SFS file                                                                                 |
 
 ---
 
