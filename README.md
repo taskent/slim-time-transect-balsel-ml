@@ -581,8 +581,7 @@ from the reported precision and recall values.
 
 ```bash
 Rscript calculate_Fscores_rf.r \
-    <input_dir> \
-    <evol_mode_comparison> \
+    <input_file> \
     <output_file>
 ```
 
@@ -590,22 +589,15 @@ Arguments:
 
 | Argument               | Description                                               |
 | ---------------------- | --------------------------------------------------------- |
-| `input_dir`            | Directory containing RF metric files                      |
-| `evol_mode_comparison` | Evolutionary comparison label used in RF result filenames |
+| `input_dir`            | Input file containing RF metric files                     |
 | `output_file`          | Output file containing RF metrics plus F-scores           |
 
-Expected input filename pattern:
-
-```text
-results_all_stats_rf_cv10_<evol_mode_comparison>_<dataset>.txt
-```
 
 Example:
 
 ```bash
 Rscript calculate_Fscores_rf.r \
-    results_rf \
-    over_vs_neutral \
+    results_all_stats_rf_cv10_over_vs_neutral_allDS.txt \
     results_all_stats_rf_cv10_over_vs_neutral_allDS_with_fscores.txt
 ```
 
