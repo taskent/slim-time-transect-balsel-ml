@@ -314,7 +314,7 @@ run_all_stats_cv <- function(df,
     fit_resamples(
       resamples = folds,
       metrics = metric_set(
-        accuracy,
+        bal_accuracy,
         pr_auc,
         precision,
         recall,
