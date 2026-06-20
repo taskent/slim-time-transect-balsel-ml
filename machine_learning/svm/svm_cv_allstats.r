@@ -382,7 +382,7 @@ run_svm_grid_cv <- function(df,
   # These metrics are all calculated, but the final "best"
   # hyperparameter combination is selected later using ROC AUC.
   metrics_used <- metric_set(
-    accuracy,
+    bal_accuracy,
     precision,
     recall,
     pr_auc,
