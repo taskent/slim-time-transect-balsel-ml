@@ -551,7 +551,7 @@ Outputs:
 
 RF metrics include:
 
-* Accuracy
+* Balanced Accuracy
 * PR AUC
 * Precision
 * Recall
@@ -784,7 +784,7 @@ svm_<evol_mode_comparison>_grid_failures.log
 
 SVM metrics include:
 
-* Accuracy
+* Balanced Accuracy
 * PR AUC
 * Precision
 * Recall
