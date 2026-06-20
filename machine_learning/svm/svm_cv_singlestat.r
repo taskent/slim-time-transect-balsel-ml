@@ -372,7 +372,7 @@ run_svm_single_stat_cv <- function(df,
   ############################################################
   # Metrics are calculated for each cross-validation fold.
   metrics_used <- metric_set(
-    accuracy,
+    bal_accuracy,
     precision,
     recall,
     roc_auc,
