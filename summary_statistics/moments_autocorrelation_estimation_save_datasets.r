@@ -251,10 +251,7 @@ df_moments_summary_stats_overVSneutral <- df_moments_summary_stats %>%
 # acf() returns lag 0 first, so:
 #   lag 1 = acf[2, 1, 1]
 #   lag 2 = acf[3, 1, 1]
-#
-# na.action = na.pass:
-#   NAs are not removed.
-#   This is stricter than na.omit and avoids changing temporal spacing.
+
 
 get_acf_lag <- function(x, lag) {
   acf(
