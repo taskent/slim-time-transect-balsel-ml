@@ -151,18 +151,7 @@ Statistics include:
 ### Diversity statistics
 
 * π
-* Watterson's θ
 * Number of singletons
-
-### Heterozygosity statistics
-
-* Observed heterozygosity (mean, median, maximum)
-* Observed/expected heterozygosity (mean, median, maximum)
-
-### Linkage disequilibrium
-
-* r² (median)
-* Kelly's ZnS
 
 ### Haplotype statistics
 
@@ -174,17 +163,13 @@ Statistics include:
 * Number of haplotypes
 * iHS (median)
 * nSL (median, maximum)
-* EHH (mean, median)
-* Pairwise differences between haplotypes (mean, median, maximum)
 
 ### Site-frequency-spectrum statistics
 
 * Tajima's D
 * Fay & Wu's H
-* Fu & Li's D*
-* Fu & Li's F*
-* Zeng's E
 * Harpending's raggedness index
+* Pairwise differences between haplotypes (mean, median, maximum)
 
 ### Balancing-selection-related statistics
 
