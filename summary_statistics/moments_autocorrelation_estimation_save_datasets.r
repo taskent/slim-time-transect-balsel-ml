@@ -85,17 +85,6 @@ colnames(df_summary_stats) <- c(
   "Max_MeanPwiseDist",
 
   "TjD",
-  "Theta_hat_w",
-
-  "Mean_Obs_Het",
-  "Median_Obs_Het",
-  "Max_Obs_Het",
-
-  "Mean_Obs_Exp",
-  "Median_Obs_Exp",
-  "Max_Obs_Exp",
-
-  "Median_R2",
 
   "H1",
   "H12",
@@ -105,21 +94,14 @@ colnames(df_summary_stats) <- c(
   "Hap_Div",
   "N_Hap",
 
-  "Mean_Ehh",
-  "Median_Ehh",
   "Median_Ihs",
-
   "Max_Nsl",
   "Median_Nsl",
 
   "Ncd1",
-  "Kellyzn",
   "Pi_est",
   "Hstat",
   "Ss",
-  "Dstar",
-  "Fstar",
-  "ZengE",
   "Rgd",
 
   "Median_Freq",
@@ -148,17 +130,6 @@ column_descriptions <- c(
   Max_MeanPwiseDist = "Maximum mean pairwise difference across SNPs",
 
   TjD = "Tajima's D",
-  Theta_hat_w = "Watterson's theta",
-
-  Mean_Obs_Het = "Mean observed heterozygosity",
-  Median_Obs_Het = "Median observed heterozygosity",
-  Max_Obs_Het = "Maximum observed heterozygosity",
-
-  Mean_Obs_Exp = "Mean observed/expected heterozygosity ratio",
-  Median_Obs_Exp = "Median observed/expected heterozygosity ratio",
-  Max_Obs_Exp = "Maximum observed/expected heterozygosity ratio",
-
-  Median_R2 = "Median pairwise LD r^2",
 
   H1 = "Garud's H1",
   H12 = "Garud's H12",
@@ -168,20 +139,14 @@ column_descriptions <- c(
   Hap_Div = "Haplotype diversity",
   N_Hap = "Number of unique haplotypes",
 
-  Mean_Ehh = "Mean EHH decay",
-  Median_Ehh = "Median EHH decay",
   Median_Ihs = "Median iHS",
   Max_Nsl = "Maximum nSL",
   Median_Nsl = "Median nSL",
 
   Ncd1 = "Distance of allele frequencies from 0.5",
-  Kellyzn = "Kelly's ZnS",
   Pi_est = "Average pairwise differences, pi",
   Hstat = "Fay and Wu's H",
   Ss = "Number of singleton SNPs",
-  Dstar = "Fu and Li's D*",
-  Fstar = "Fu and Li's F*",
-  ZengE = "Zeng's E",
   Rgd = "Harpending's raggedness index",
 
   Median_Freq = "Median allele frequency in the central window",
