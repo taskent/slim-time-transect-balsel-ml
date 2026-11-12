@@ -121,7 +121,7 @@ The script
 calculate_summary_statistics.py
 ```
 
-computes 35 population-genetic summary statistics from ms-format SLiM output.
+computes 21 population-genetic summary statistics from ms-format SLiM output.
 
 ### Usage
 
