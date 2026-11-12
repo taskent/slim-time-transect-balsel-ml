@@ -47,7 +47,7 @@ WINDOW=10000
 CHR=1
 
 # Recombination rate used by parse_ballermix_input.py
-REC_RATE=1e-8
+REC_RATE=1e-6
 
 # BetaScan MAF threshold
 BETASCAN_M=0.15
